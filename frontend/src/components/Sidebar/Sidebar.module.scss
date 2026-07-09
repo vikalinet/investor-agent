@@ -1,0 +1,191 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.sidebar {
+  width: $sidebar-width;
+  height: 100vh;
+  background: $color-primary;
+  display: flex;
+  flex-direction: column;
+  padding: $sp-5;
+  box-shadow: $shadow-sidebar;
+  position: sticky;
+  top: 0;
+  flex-shrink: 0;
+  overflow-y: auto;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: $sp-3;
+  padding: $sp-3 $sp-2;
+  margin-bottom: $sp-5;
+}
+
+.logoIcon {
+  @include flex-center;
+  width: 36px;
+  height: 36px;
+  background: $color-accent;
+  border-radius: $radius-md;
+  color: $color-primary;
+  flex-shrink: 0;
+}
+
+.logoText {
+  display: flex;
+  flex-direction: column;
+}
+
+.logoTitle {
+  font-family: $font-heading;
+  font-size: $fs-md;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.logoSubtitle {
+  font-size: $fs-xs;
+  color: $color-accent;
+  font-weight: 500;
+}
+
+.newChat {
+  @include button-base;
+  width: 100%;
+  background: $color-accent;
+  color: $color-primary;
+  font-weight: 600;
+  padding: $sp-3 $sp-4;
+  margin-bottom: $sp-5;
+
+  &:hover {
+    background: $color-accent-light;
+    transform: translateY(-2px);
+  }
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: $sp-1;
+  margin-bottom: $sp-5;
+  padding-bottom: $sp-5;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: $sp-3;
+  padding: $sp-3 $sp-4;
+  background: transparent;
+  border: none;
+  border-radius: $radius-md;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: $fs-sm;
+  font-weight: 500;
+  cursor: pointer;
+  transition: $transition-fast;
+  text-align: left;
+
+  svg {
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+  }
+}
+
+.historySection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.historyTitle {
+  font-size: $fs-xs;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 0 $sp-4;
+  margin-bottom: $sp-3;
+}
+
+.historyList {
+  display: flex;
+  flex-direction: column;
+  gap: $sp-1;
+  overflow-y: auto;
+}
+
+.historyItem {
+  display: flex;
+  align-items: flex-start;
+  gap: $sp-2;
+  padding: $sp-3 $sp-4;
+  background: transparent;
+  border: none;
+  border-radius: $radius-md;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: $transition-fast;
+  text-align: left;
+  width: 100%;
+
+  svg {
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  &.active {
+    background: rgba(200, 169, 110, 0.15);
+    color: $color-accent;
+
+    .historyName {
+      color: $color-accent;
+    }
+  }
+}
+
+.historyContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.historyName {
+  font-size: $fs-sm;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  @include text-truncate;
+}
+
+.historyDate {
+  font-size: $fs-xs;
+  color: rgba(255, 255, 255, 0.35);
+  font-weight: 400;
+}
+
+// Scrollbar
+.sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: $radius-full;
+}

@@ -1,0 +1,136 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.header {
+  background: $color-card;
+  border-bottom: 1px solid $color-border;
+  padding: $sp-6 $sp-8;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.content {
+  max-width: $max-content-width;
+  margin: 0 auto;
+}
+
+.title {
+  margin-bottom: $sp-6;
+
+  h1 {
+    font-size: $fs-2xl;
+    font-weight: 700;
+    color: $color-primary;
+    margin-bottom: $sp-1;
+  }
+
+  p {
+    font-size: $fs-sm;
+    color: $color-text-muted;
+    font-weight: 500;
+  }
+}
+
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $sp-5;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.kpiCard {
+  @include card-base;
+  @include card-hover;
+  display: flex;
+  align-items: flex-start;
+  gap: $sp-4;
+  padding: $sp-5;
+  border-radius: $radius-lg;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.kpiIcon {
+  @include flex-center;
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  border-radius: $radius-md;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.kpiBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.kpiLabel {
+  display: block;
+  font-size: $fs-xs;
+  font-weight: 500;
+  color: $color-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: $sp-2;
+}
+
+.kpiValue {
+  display: flex;
+  align-items: baseline;
+  gap: $sp-1;
+  margin-bottom: $sp-2;
+}
+
+.kpiNumber {
+  font-family: $font-body;
+  font-size: $fs-2xl;
+  font-weight: 700;
+  color: $color-primary;
+  @include tabular-nums;
+}
+
+.kpiUnit {
+  font-size: $fs-sm;
+  font-weight: 600;
+  color: $color-text-secondary;
+}
+
+.kpiTrend {
+  display: inline-flex;
+  align-items: center;
+  gap: $sp-1;
+  font-size: $fs-xs;
+  font-weight: 600;
+  padding: $sp-1 $sp-2;
+  border-radius: $radius-full;
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+.trendUp {
+  background: $color-success-bg;
+  color: $color-success;
+}
+
+.trendDown {
+  background: $color-danger-bg;
+  color: $color-danger;
+}
+
+.trendStable {
+  background: $color-primary-06;
+  color: $color-text-muted;
+}

@@ -1,0 +1,116 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.container {
+  @include card-base;
+  padding: $sp-6;
+  border-radius: $radius-lg;
+}
+
+.title {
+  font-size: $fs-md;
+  font-weight: 700;
+  color: $color-primary;
+  margin-bottom: $sp-5;
+  padding-bottom: $sp-3;
+  border-bottom: 1px solid $color-border-light;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.step {
+  display: flex;
+  gap: $sp-3;
+  position: relative;
+}
+
+.stepConnector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 24px;
+}
+
+.line {
+  width: 2px;
+  flex: 1;
+  background: $color-border;
+  margin-top: $sp-2;
+  min-height: 24px;
+
+  .step:last-child & {
+    display: none;
+  }
+}
+
+.stepIcon {
+  @include flex-center;
+  width: 24px;
+  height: 24px;
+  border-radius: $radius-full;
+  flex-shrink: 0;
+  transition: $transition-base;
+
+  &.completed {
+    background: $color-success;
+    color: #fff;
+  }
+
+  &.current {
+    background: $color-accent;
+    color: #fff;
+    animation: pulse 2s $ease-standard infinite;
+  }
+
+  &.pending {
+    background: $color-border;
+    color: $color-text-muted;
+  }
+
+  &.rejected {
+    background: $color-danger;
+    color: #fff;
+  }
+}
+
+.stepContent {
+  flex: 1;
+  min-width: 0;
+  padding-bottom: $sp-5;
+}
+
+.stepHeader {
+  @include flex-between;
+  gap: $sp-3;
+  margin-bottom: $sp-1;
+}
+
+.stepTitle {
+  font-size: $fs-sm;
+  font-weight: 600;
+  color: $color-text;
+}
+
+.stepDate {
+  font-size: $fs-xs;
+  color: $color-text-muted;
+  font-weight: 500;
+  @include tabular-nums;
+}
+
+.stepDescription {
+  font-size: $fs-xs;
+  color: $color-text-secondary;
+  line-height: 1.4;
+}
+
+.step:last-child {
+  .stepContent {
+    padding-bottom: 0;
+  }
+}

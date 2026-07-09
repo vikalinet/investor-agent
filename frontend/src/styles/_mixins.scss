@@ -1,0 +1,185 @@
+// ============================================================================
+//  Mixins — Reusable SCSS patterns
+// ============================================================================
+
+@use './variables' as *;
+
+@mixin card-base {
+  background: $color-card;
+  border-radius: $radius-md;
+  box-shadow: $shadow-subtle;
+  transition: $transition-base;
+}
+
+@mixin card-hover {
+  &:hover {
+    box-shadow: $shadow-hover;
+    transform: translateY(-2px);
+  }
+}
+
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $sp-2;
+  padding: $sp-3 $sp-5;
+  font-family: $font-body;
+  font-size: $fs-sm;
+  font-weight: 500;
+  line-height: 1.4;
+  border-radius: $radius-md;
+  border: none;
+  cursor: pointer;
+  transition: $transition-base;
+}
+
+@mixin button-primary {
+  @include button-base;
+  background: $color-primary;
+  color: #fff;
+
+  &:hover {
+    background: $color-primary-light;
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+@mixin button-secondary {
+  @include button-base;
+  background: transparent;
+  color: $color-primary;
+  border: 1px solid $color-primary-12;
+
+  &:hover {
+    background: $color-primary-06;
+    border-color: $color-primary-40;
+    transform: translateY(-2px);
+  }
+}
+
+@mixin button-ghost {
+  @include button-base;
+  background: transparent;
+  color: $color-text-secondary;
+
+  &:hover {
+    background: $color-border;
+    color: $color-text;
+  }
+}
+
+@mixin input-base {
+  width: 100%;
+  padding: $sp-3 0;
+  font-family: $font-body;
+  font-size: $fs-base;
+  color: $color-text;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid $color-border;
+  outline: none;
+  transition: $transition-fast;
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+
+  &:focus {
+    border-bottom-color: $color-primary;
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+@mixin skeleton {
+  background: linear-gradient(
+    90deg,
+    $color-border-light 0%,
+    $color-border 50%,
+    $color-border-light 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+@mixin status-badge($type) {
+  @if $type == 'success' {
+    background: $color-success-bg;
+    color: $color-success;
+  } @else if $type == 'warning' {
+    background: $color-warning-bg;
+    color: $color-warning;
+  } @else if $type == 'danger' {
+    background: $color-danger-bg;
+    color: $color-danger;
+  } @else if $type == 'info' {
+    background: $color-info-bg;
+    color: $color-info;
+  }
+}
+
+// --- Keyframes ---
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

@@ -1,0 +1,178 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: $color-bg;
+  border-radius: $radius-lg;
+  overflow: hidden;
+}
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: $sp-6;
+  display: flex;
+  flex-direction: column;
+  gap: $sp-5;
+}
+
+.message {
+  display: flex;
+  gap: $sp-3;
+  max-width: 80%;
+  animation: fadeInUp 0.3s $ease-standard;
+
+  &.user {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+
+    .messageContent {
+      background: $color-primary;
+      color: #fff;
+      border-radius: $radius-lg $radius-lg $radius-sm $radius-lg;
+
+      .messageTime {
+        color: rgba(255, 255, 255, 0.7);
+      }
+    }
+  }
+
+  &.agent {
+    align-self: flex-start;
+
+    .messageContent {
+      background: $color-card;
+      color: $color-text;
+      border-radius: $radius-lg $radius-lg $radius-lg $radius-sm;
+      box-shadow: $shadow-subtle;
+    }
+  }
+
+  &.loading {
+    .messageContent {
+      padding: $sp-3 $sp-4;
+    }
+  }
+}
+
+.agentAvatar {
+  @include flex-center;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, $color-accent 0%, $color-accent-light 100%);
+  border-radius: $radius-full;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.messageContent {
+  padding: $sp-3 $sp-4;
+  display: flex;
+  flex-direction: column;
+  gap: $sp-3;
+}
+
+.messageText {
+  font-size: $fs-base;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.embeddedCards {
+  display: flex;
+  flex-direction: column;
+  gap: $sp-3;
+}
+
+.messageTime {
+  font-size: $fs-xs;
+  color: $color-text-muted;
+  font-weight: 500;
+}
+
+.typingIndicator {
+  display: flex;
+  gap: $sp-1;
+  padding: $sp-1 0;
+
+  span {
+    width: 6px;
+    height: 6px;
+    background: $color-accent;
+    border-radius: $radius-full;
+    animation: typingBounce 1.4s ease-in-out infinite;
+
+    &:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    &:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+  }
+}
+
+@keyframes typingBounce {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+.inputForm {
+  display: flex;
+  align-items: center;
+  gap: $sp-3;
+  padding: $sp-4 $sp-6;
+  background: $color-card;
+  border-top: 1px solid $color-border;
+}
+
+.input {
+  @include input-base;
+  flex: 1;
+  padding: $sp-3 $sp-2;
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.sendButton {
+  @include flex-center;
+  width: 40px;
+  height: 40px;
+  background: $color-primary;
+  color: #fff;
+  border: none;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: $transition-base;
+  flex-shrink: 0;
+
+  &:hover:not(:disabled) {
+    background: $color-primary-light;
+    transform: translateY(-2px);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
