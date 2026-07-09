@@ -42,6 +42,7 @@
 
   &.agent {
     align-self: flex-start;
+    max-width: 90%;
 
     .messageContent {
       background: $color-card;
@@ -73,6 +74,7 @@
   display: flex;
   flex-direction: column;
   gap: $sp-3;
+  min-width: 0;
 }
 
 .messageText {
@@ -82,9 +84,11 @@
 }
 
 .embeddedCards {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: $sp-3;
+  width: 100%;
+  min-width: 0;
 }
 
 .messageTime {

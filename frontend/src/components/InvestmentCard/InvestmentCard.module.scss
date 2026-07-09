@@ -10,21 +10,33 @@
   border-radius: $radius-lg;
 
   &[data-compact='true'] {
-    flex-direction: row;
-    max-width: 420px;
+    flex-direction: column;
+    max-width: 100%;
+    width: 100%;
 
     .imageWrapper {
-      width: 140px;
+      width: 100%;
+      aspect-ratio: 2 / 1;
       flex-shrink: 0;
     }
 
     .content {
-      padding: $sp-4;
+      padding: $sp-3;
+      gap: $sp-2;
+    }
+
+    .title {
+      font-size: $fs-sm;
     }
 
     .metrics {
       grid-template-columns: repeat(3, 1fr);
-      gap: $sp-3;
+      gap: $sp-2;
+      padding: $sp-2 0;
+    }
+
+    .metricValue {
+      font-size: $fs-sm;
     }
 
     .progressSection {
