@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Montserrat, IBM_Plex_Sans } from 'next/font/google';
+import { Sidebar } from '@/components/Sidebar/Sidebar';
 import './globals.scss';
 
 const montserrat = Montserrat({
@@ -28,7 +29,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru" className={`${montserrat.variable} ${ibmPlexSans.variable}`}>
-      <body>{children}</body>
+      <body>
+        <div style={{ display: 'flex', minHeight: '100vh' }}>
+          <Sidebar />
+          <main style={{ flex: 1, minWidth: 0 }}>{children}</main>
+        </div>
+      </body>
     </html>
   );
 }

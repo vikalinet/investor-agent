@@ -1,0 +1,59 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.page {
+  max-width: $max-content-width;
+  width: 100%;
+  margin: 0 auto;
+  padding: $sp-6 $sp-8;
+  display: flex;
+  flex-direction: column;
+  gap: $sp-8;
+}
+
+.header {
+  margin-bottom: $sp-4;
+
+  h1 {
+    font-size: $fs-2xl;
+    font-weight: 700;
+    color: $color-primary;
+    margin-bottom: $sp-2;
+  }
+
+  p {
+    font-size: $fs-md;
+    color: $color-text-secondary;
+  }
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: $sp-6;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chatArea {
+  display: flex;
+  flex-direction: column;
+  gap: $sp-4;
+  min-height: 480px;
+
+  // ChatInterface fills remaining space
+  > div:last-child {
+    flex: 1;
+    min-height: 420px;
+    border: 1px solid $color-border;
+    border-radius: $radius-lg;
+    overflow: hidden;
+  }
+}
+
+.sidePanel {
+  display: flex;
+  flex-direction: column;
+}

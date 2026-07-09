@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Plus, ChatCircle, ChartLine, MapPin, FileText } from '@phosphor-icons/react';
 import type { SidebarHistoryItem } from '@/types';
 import styles from './Sidebar.module.scss';
@@ -38,9 +40,10 @@ const defaultHistory: SidebarHistoryItem[] = [
 ];
 
 const navItems = [
-  { icon: <ChartLine weight="thin" size={18} />, label: 'Дашборд' },
-  { icon: <MapPin weight="thin" size={18} />, label: 'Территории' },
-  { icon: <FileText weight="thin" size={18} />, label: 'Документы' },
+  { icon: <ChartLine weight="thin" size={18} />, label: 'Дашборд', href: '/' },
+  { icon: <ChatCircle weight="thin" size={18} />, label: 'Чат с агентом', href: '/chat' },
+  { icon: <MapPin weight="thin" size={18} />, label: 'Территории', href: '/territories' },
+  { icon: <FileText weight="thin" size={18} />, label: 'Документы', href: '/documents' },
 ];
 
 export function Sidebar({
@@ -48,6 +51,8 @@ export function Sidebar({
   activeId = '1',
   onSelect,
 }: SidebarProps) {
+  const pathname = usePathname();
+
   return (
     <aside className={styles.sidebar}>
       <div className={styles.logo}>
@@ -60,18 +65,25 @@ export function Sidebar({
         </div>
       </div>
 
-      <button className={styles.newChat}>
+      <Link href="/chat" className={styles.newChat}>
         <Plus weight="thin" size={18} />
         <span>Новый диалог</span>
-      </button>
+      </Link>
 
       <nav className={styles.nav}>
-        {navItems.map((item) => (
-          <button key={item.label} className={styles.navItem}>
-            {item.icon}
-            <span>{item.label}</span>
-          </button>
-        ))}
+        {navItems.map((item) => {
+          const isActive = pathname === item.href;
+          return (
+            <Link
+              key={item.label}
+              href={item.href}
+              className={`${styles.navItem} ${isActive ? styles.navItemActive : ''}`}
+            >
+              {item.icon}
+              <span>{item.label}</span>
+            </Link>
+          );
+        })}
       </nav>
 
       <div className={styles.historySection}>

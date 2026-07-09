@@ -11,7 +11,7 @@
   font-size: $fs-md;
   font-weight: 700;
   color: $color-primary;
-  margin-bottom: $sp-5;
+  margin-bottom: $sp-6;
   padding-bottom: $sp-3;
   border-bottom: 1px solid $color-border-light;
 }
@@ -24,11 +24,12 @@
 
 .step {
   display: flex;
-  gap: $sp-3;
+  align-items: flex-start;
+  gap: $sp-4;
   position: relative;
 }
 
-.stepConnector {
+.stepIconWrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -40,12 +41,7 @@
   width: 2px;
   flex: 1;
   background: $color-border;
-  margin-top: $sp-2;
-  min-height: 24px;
-
-  .step:last-child & {
-    display: none;
-  }
+  min-height: 32px;
 }
 
 .stepIcon {
@@ -54,6 +50,7 @@
   height: 24px;
   border-radius: $radius-full;
   flex-shrink: 0;
+  z-index: 1;
   transition: $transition-base;
 
   &.completed {
@@ -81,11 +78,14 @@
 .stepContent {
   flex: 1;
   min-width: 0;
-  padding-bottom: $sp-5;
+  padding-bottom: $sp-6;
+  padding-top: 2px;
 }
 
 .stepHeader {
-  @include flex-between;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
   gap: $sp-3;
   margin-bottom: $sp-1;
 }
@@ -101,12 +101,14 @@
   color: $color-text-muted;
   font-weight: 500;
   @include tabular-nums;
+  flex-shrink: 0;
 }
 
 .stepDescription {
   font-size: $fs-xs;
   color: $color-text-secondary;
   line-height: 1.4;
+  margin: 0;
 }
 
 .step:last-child {

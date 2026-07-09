@@ -56,21 +56,22 @@ export function ApplicationStatus({
       <div className={styles.timeline}>
         {steps.map((step, index) => (
           <div key={step.id} className={styles.step}>
-            <div className={styles.stepConnector}>
-              {index < steps.length - 1 && <div className={styles.line} />}
-              <div
-                className={`${styles.stepIcon} ${styles[step.status]}`}
-              >
+            {/* Левая колонка: кружок + линия */}
+            <div className={styles.stepIconWrapper}>
+              <div className={`${styles.stepIcon} ${styles[step.status]}`}>
                 {statusIcons[step.status]}
               </div>
+              {index < steps.length - 1 && (
+                <div className={styles.line} />
+              )}
             </div>
 
+            {/* Правая колонка: контент */}
             <div className={styles.stepContent}>
               <div className={styles.stepHeader}>
                 <span className={styles.stepTitle}>{step.title}</span>
                 {step.date && <span className={styles.stepDate}>{step.date}</span>}
               </div>
-
               {step.description && (
                 <p className={styles.stepDescription}>{step.description}</p>
               )}

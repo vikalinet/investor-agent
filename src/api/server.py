@@ -333,12 +333,12 @@ async def get_projects(industry: Optional[str] = None, limit: int = 10):
     # Получаем меры поддержки
     measures = get_support_measures()
     
-    # Маппинг изображений по отраслям
+    # Маппинг изображений по отраслям (placehold.co — надёжный placeholder)
     image_map = {
-        "Металлургия": "https://images.unsplash.com/photo-1565043666747-69f6646db940?w=600&q=80",
-        "Сельское хозяйство": "https://images.unsplash.com/photo-1625246333195-58f21a40636d?w=600&q=80",
-        "Логистика": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&q=80",
-        "IT и телекоммуникации": "https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&q=80",
+        "Металлургия": "https://placehold.co/600x400/1a3a6b/ffffff?text=Металлургия",
+        "Сельское хозяйство": "https://placehold.co/600x400/2E9B72/ffffff?text=Сельское+хозяйство",
+        "Логистика": "https://placehold.co/600x400/3B7CC8/ffffff?text=Логистика",
+        "IT и телекоммуникации": "https://placehold.co/600x400/8B5CF6/ffffff?text=IT",
     }
     
     # Конвертируем в формат InvestmentProject
@@ -374,7 +374,7 @@ async def get_projects(industry: Optional[str] = None, limit: int = 10):
             "name": p["company_name"],
             "industry": p["industry"],
             "location": p["location"],
-            "imageUrl": image_map.get(p["industry"], "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80"),
+            "imageUrl": image_map.get(p["industry"], "https://placehold.co/600x400/0B1F3B/C8A96E?text=ИнвестПроект"),
             "investmentAmount": investment,
             "irr": round(15 + (investment / 1000) * 5, 1),  # Имитация IRR
             "npv": round(investment * 0.18, 0),  # Имитация NPV

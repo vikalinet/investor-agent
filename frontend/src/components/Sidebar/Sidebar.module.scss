@@ -60,6 +60,10 @@
   font-weight: 600;
   padding: $sp-3 $sp-4;
   margin-bottom: $sp-5;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: $sp-3;
 
   &:hover {
     background: $color-accent-light;
@@ -90,6 +94,7 @@
   cursor: pointer;
   transition: $transition-fast;
   text-align: left;
+  text-decoration: none;
 
   svg {
     flex-shrink: 0;
@@ -99,6 +104,11 @@
     background: rgba(255, 255, 255, 0.06);
     color: #fff;
   }
+}
+
+.navItemActive {
+  background: rgba(200, 169, 110, 0.15);
+  color: $color-accent;
 }
 
 .historySection {
