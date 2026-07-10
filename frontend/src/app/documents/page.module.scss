@@ -1,0 +1,452 @@
+
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.page {
+  max-width: $max-content-width;
+  width: 100%;
+  margin: 0 auto;
+  padding: $sp-6 $sp-8;
+  display: flex;
+  flex-direction: column;
+  gap: $sp-6;
+}
+
+// === Header ===
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $sp-6;
+
+  h1 {
+    font-family: $font-heading;
+    font-size: $fs-2xl;
+    font-weight: 700;
+    color: $color-primary;
+    margin-bottom: $sp-2;
+  }
+
+  p {
+    font-size: $fs-md;
+    color: $color-text-secondary;
+  }
+}
+
+.toggle {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  background: $color-card;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  flex-shrink: 0;
+}
+
+.toggleBtn {
+  display: flex;
+  align-items: center;
+  gap: $sp-2;
+  padding: $sp-2 $sp-4;
+  background: transparent;
+  border: none;
+  border-radius: $radius-sm;
+  font-size: $fs-sm;
+  font-weight: 500;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: $transition-fast;
+
+  &:hover {
+    color: $color-text;
+  }
+}
+
+.toggleActive {
+  background: $color-primary;
+  color: #fff;
+}
+
+// === Search ===
+
+.searchRow {
+  display: flex;
+  align-items: center;
+  gap: $sp-4;
+}
+
+.searchBox {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: $sp-3;
+  padding: $sp-3 $sp-4;
+  background: $color-card;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  transition: $transition-base;
+
+  &:focus-within {
+    border-color: $color-accent;
+    box-shadow: 0 0 0 3px $color-accent-10;
+  }
+
+  svg {
+    color: $color-text-muted;
+    flex-shrink: 0;
+  }
+
+  input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: $fs-sm;
+    color: $color-text;
+    width: 100%;
+
+    &::placeholder {
+      color: $color-text-muted;
+    }
+  }
+}
+
+.resultCount {
+  font-size: $fs-sm;
+  color: $color-text-muted;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+// === Grid ===
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $sp-5;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cardSkeleton {
+  @include card-base;
+  padding: $sp-5;
+  border-radius: $radius-lg;
+}
+
+.empty {
+  grid-column: 1 / -1;
+  @include flex-center;
+  flex-direction: column;
+  gap: $sp-4;
+  padding: $sp-12;
+  background: $color-card;
+  border-radius: $radius-lg;
+  color: $color-text-muted;
+
+  svg {
+    opacity: 0.3;
+  }
+
+  p {
+    font-size: $fs-lg;
+    font-weight: 600;
+  }
+}
+
+// === Card (shared) ===
+
+.card {
+  background: $color-card;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  padding: $sp-5;
+  display: flex;
+  flex-direction: column;
+  gap: $sp-3;
+  transition: $transition-base;
+
+  &:hover {
+    border-color: $color-accent-20;
+    box-shadow: $shadow-hover;
+    transform: translateY(-2px);
+  }
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $sp-3;
+}
+
+.cardTitle {
+  font-family: $font-heading;
+  font-size: $fs-md;
+  font-weight: 700;
+  color: $color-primary;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.cardDesc {
+  font-size: $fs-sm;
+  color: $color-text-secondary;
+  line-height: 1.45;
+  margin: 0;
+}
+
+// === Progress ===
+
+.progressRow {
+  display: flex;
+  align-items: center;
+  gap: $sp-3;
+}
+
+.progressBar {
+  flex: 1;
+  height: 6px;
+  background: $color-border;
+  border-radius: $radius-full;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, $color-primary 0%, $color-accent 100%);
+  border-radius: $radius-full;
+  transition: width 0.5s $ease-standard;
+}
+
+.progressValue {
+  font-size: $fs-xs;
+  font-weight: 700;
+  color: $color-primary;
+  @include tabular-nums;
+  white-space: nowrap;
+}
+
+// === Document Checklist ===
+
+.docList {
+  display: flex;
+  flex-direction: column;
+  gap: $sp-2;
+}
+
+.docItem {
+  display: flex;
+  align-items: center;
+  gap: $sp-3;
+  padding: $sp-2 $sp-3;
+  background: $color-bg;
+  border: 1px solid $color-border-light;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: $transition-fast;
+  text-align: left;
+  width: 100%;
+  font-family: $font-body;
+
+  &:hover {
+    border-color: $color-accent-20;
+    background: $color-card;
+  }
+}
+
+.docCheck {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $radius-full;
+  flex-shrink: 0;
+  transition: $transition-fast;
+}
+
+.docName {
+  flex: 1;
+  font-size: $fs-sm;
+  color: $color-text;
+  font-weight: 500;
+}
+
+.docStatusLabel {
+  font-size: $fs-xs;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+// Status variants
+.doc_pending {
+  .docCheck {
+    background: $color-border;
+    color: $color-text-muted;
+  }
+  .docStatusLabel {
+    color: $color-text-muted;
+  }
+}
+
+.doc_submitted {
+  background: $color-info-bg;
+  border-color: rgba(59, 124, 200, 0.2);
+
+  .docCheck {
+    background: $color-info;
+    color: #fff;
+  }
+  .docStatusLabel {
+    color: $color-info;
+  }
+}
+
+.doc_approved {
+  background: $color-success-bg;
+  border-color: rgba(46, 155, 114, 0.2);
+
+  .docCheck {
+    background: $color-success;
+    color: #fff;
+  }
+  .docStatusLabel {
+    color: $color-success;
+  }
+}
+
+// === Card Footer ===
+
+.cardFooter {
+  display: flex;
+  flex-direction: column;
+  gap: $sp-2;
+  padding-top: $sp-3;
+  border-top: 1px solid $color-border-light;
+}
+
+.footerItem {
+  display: flex;
+  align-items: center;
+  gap: $sp-2;
+  font-size: $fs-xs;
+  color: $color-text-muted;
+
+  svg {
+    color: $color-accent;
+    flex-shrink: 0;
+  }
+
+  a {
+    color: $color-primary;
+    text-decoration: none;
+    transition: $transition-fast;
+
+    &:hover {
+      color: $color-accent;
+    }
+  }
+}
+
+// === Template Card ===
+
+.templateIcon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $color-primary-06;
+  color: $color-primary;
+  border-radius: $radius-md;
+  flex-shrink: 0;
+}
+
+.templateType {
+  padding: 3px $sp-3;
+  font-size: $fs-xs;
+  font-weight: 600;
+  color: $color-accent;
+  background: $color-accent-10;
+  border-radius: $radius-full;
+}
+
+.templateMeasure {
+  font-size: $fs-xs;
+  color: $color-text-muted;
+  margin: 0;
+  font-weight: 500;
+}
+
+// === Required Fields ===
+
+.fieldsRow {
+  display: flex;
+  flex-direction: column;
+  gap: $sp-2;
+}
+
+.fieldsLabel {
+  font-size: $fs-xs;
+  color: $color-text-muted;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.fieldsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $sp-2;
+}
+
+.fieldTag {
+  padding: 3px $sp-3;
+  background: $color-primary-06;
+  color: $color-primary;
+  font-size: $fs-xs;
+  font-weight: 500;
+  border-radius: $radius-full;
+  font-family: monospace;
+}
+
+// === Template Preview ===
+
+.templatePreview {
+  background: $color-bg;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  padding: $sp-3 $sp-4;
+  font-size: $fs-xs;
+  line-height: 1.5;
+  color: $color-text-secondary;
+  white-space: pre-wrap;
+  word-break: word-break;
+  max-height: 200px;
+  overflow-y: auto;
+  margin: 0;
+  font-family: monospace;
+}
+
+// === Template Actions ===
+
+.templateActions {
+  display: flex;
+  gap: $sp-2;
+  margin-top: auto;
+  padding-top: $sp-2;
+}
+
+.previewBtn {
+  @include button-secondary;
+  flex: 0 0 auto;
+}
+
+.downloadBtn {
+  @include button-primary;
+  flex: 1;
+}

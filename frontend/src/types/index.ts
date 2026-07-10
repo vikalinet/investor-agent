@@ -64,3 +64,31 @@ export interface SidebarHistoryItem {
   date: string;
   preview: string;
 }
+
+// ============================================================================
+//  Документы
+// ============================================================================
+
+export type DocumentStatus = 'pending' | 'submitted' | 'approved';
+
+export interface DocumentTemplate {
+  id: string;
+  supportMeasureId: number;
+  supportMeasureName: string;
+  documentType: string;
+  templateName: string;
+  templateContent: string;
+  requiredFields: string[];
+}
+
+export interface MeasureWithDocuments {
+  id: number;
+  name: string;
+  measureType: SupportMeasureType;
+  description: string;
+  requiredDocuments: string[];
+  responsibleAgency: string;
+  contactEmail: string;
+  maxAmount: number | null;
+  applicationDeadline: string | null;
+}

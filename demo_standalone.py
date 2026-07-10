@@ -32,7 +32,7 @@ def create_test_session():
             jobs_created=450,
             description="Модернизация металлургического производства с внедрением технологий Industry 4.0",
             success_factors='["господдержка", "квалифицированные кадры", "логистика"]',
-            implementation_date=dt(2023, 6, 15).date(),
+            implementation_date=dt(2025, 6, 15).date(),
             status="completed"
         ),
         BestPractice(
@@ -43,7 +43,7 @@ def create_test_session():
             jobs_created=120,
             description="Создание тепличного комплекса с круглогодичным циклом производства",
             success_factors='["налоговые льготы", "близость к рынку сбыта", "инфраструктура"]',
-            implementation_date=dt(2023, 3, 1).date(),
+            implementation_date=dt(2025, 3, 1).date(),
             status="active"
         ),
         BestPractice(
@@ -54,7 +54,7 @@ def create_test_session():
             jobs_created=200,
             description="Логистический хаб класса А с автоматизированным складом",
             success_factors='["ТОСЭР льготы", "транспортная доступность", "земельный участок"]',
-            implementation_date=dt(2022, 11, 20).date(),
+            implementation_date=dt(2024, 11, 20).date(),
             status="active"
         ),
         BestPractice(
@@ -65,7 +65,7 @@ def create_test_session():
             jobs_created=300,
             description="Технопарк для IT-стартапов с акселерационной программой",
             success_factors='["кадровый потенциал", "университеты", "льготы для IT"]',
-            implementation_date=dt(2024, 1, 10).date(),
+            implementation_date=dt(2026, 1, 10).date(),
             status="ongoing"
         ),
     ]
@@ -140,7 +140,7 @@ def create_test_session():
             description="Компенсация до 20% затрат на приобретение оборудования для промышленных проектов",
             eligibility_criteria='{"min_investment": 50, "industry": ["manufacturing", "agriculture"], "jobs_min": 25}',
             max_amount=100.0,
-            application_deadline=dt(2025, 12, 31).date(),
+            application_deadline=dt(2026, 12, 31).date(),
             required_documents='["заявление", "бизнес-план", "договоры поставки", "финансовая отчетность"]',
             responsible_agency="Министерство инвестиций и развития Свердловской области",
             contact_email="support@mininvest.mid.ural.ru",
@@ -164,7 +164,7 @@ def create_test_session():
             description="Компенсация затрат на подключение к инженерным сетям (электричество, газ, вода)",
             eligibility_criteria='{"min_investment": 100, "priority_industries": ["manufacturing", "agriculture", "logistics"]}',
             max_amount=50.0,
-            application_deadline=dt(2025, 10, 31).date(),
+            application_deadline=dt(2026, 10, 31).date(),
             required_documents='["заявление", "технические условия", "сметы", "договоры с ресурсоснабжающими организациями"]',
             responsible_agency="Министерство инвестиций и развития Свердловской области",
             contact_email="infra@mininvest.mid.ural.ru",
@@ -188,7 +188,7 @@ def create_test_session():
             description="Грант до 500 тыс. рублей на запуск бизнеса",
             eligibility_criteria='{"experience_years": 0, "age_max": 35, "unemployed": true}',
             max_amount=0.5,
-            application_deadline=dt(2025, 6, 30).date(),
+            application_deadline=dt(2027, 6, 30).date(),
             required_documents='["заявление", "бизнес-план", "диплом/сертификат обучения"]',
             responsible_agency="Центр занятости населения",
             contact_email="grant@czn.mid.ural.ru",
@@ -327,7 +327,7 @@ def demo_documents_mcp(session):
         content={
             "заявитель": "ООО \"ИнвестПроект\"",
             "инн": "1234567890",
-            "дата": "2025-01-15"
+            "дата": "2026-01-15"
         }
     )
     print(f"   Статус: {'✅ Валиден' if valid_result['is_valid'] else '❌ Не валиден'}")
@@ -344,7 +344,7 @@ def demo_documents_mcp(session):
         content={
             "заявитель": "ООО \"ИнвестПроект\"",
             "инн": "123",
-            "дата": "2025-01-15"
+            "дата": "2026-01-15"
         }
     )
     print(f"   Статус: {'✅ Валиден' if invalid_result['is_valid'] else '❌ Не валиден'}")

@@ -81,7 +81,7 @@ def create_sqlite_session():
             jobs_created=300,
             description="Технопарк для IT-стартапов с акселерационной программой",
             success_factors='["кадровый потенциал", "университеты", "льготы для IT"]',
-            implementation_date=dt(2024, 1, 10).date(),
+            implementation_date=dt(2026, 1, 10).date(),
             status="ongoing"
         ),
     ]
@@ -156,7 +156,7 @@ def create_sqlite_session():
             description="Компенсация до 20% затрат на приобретение оборудования для промышленных проектов",
             eligibility_criteria='{"min_investment": 50, "industry": ["manufacturing", "agriculture"], "jobs_min": 25}',
             max_amount=100.0,
-            application_deadline=dt(2025, 12, 31).date(),
+            application_deadline=dt(2026, 12, 31).date(),
             required_documents='["заявление", "бизнес-план", "договоры поставки", "финансовая отчетность"]',
             responsible_agency="Министерство инвестиций и развития Свердловской области",
             contact_email="support@mininvest.mid.ural.ru",
@@ -180,7 +180,7 @@ def create_sqlite_session():
             description="Компенсация затрат на подключение к инженерным сетям (электричество, газ, вода)",
             eligibility_criteria='{"min_investment": 100, "priority_industries": ["manufacturing", "agriculture", "logistics"]}',
             max_amount=50.0,
-            application_deadline=dt(2025, 10, 31).date(),
+            application_deadline=dt(2026, 10, 31).date(),
             required_documents='["заявление", "технические условия", "сметы", "договоры с ресурсоснабжающими организациями"]',
             responsible_agency="Министерство инвестиций и развития Свердловской области",
             contact_email="infra@mininvest.mid.ural.ru",
@@ -204,7 +204,7 @@ def create_sqlite_session():
             description="Грант до 500 тыс. рублей на запуск бизнеса",
             eligibility_criteria='{"experience_years": 0, "age_max": 35, "unemployed": true}',
             max_amount=0.5,
-            application_deadline=dt(2025, 6, 30).date(),
+            application_deadline=dt(2027, 6, 30).date(),
             required_documents='["заявление", "бизнес-план", "диплом/сертификат обучения"]',
             responsible_agency="Центр занятости населения",
             contact_email="grant@czn.mid.ural.ru",
@@ -412,6 +412,42 @@ async def get_support_measures(measure_type: Optional[str] = None):
     return measures
 
 
+@app.get("/api/documents")
+async def get_documents():
+    """Получить шаблоны документов и чек-листы по мерам поддержки"""
+    import json as _json
+    from src.mcp.database_server import get_support_measures, get_db_session
+    from src.database.models import DocumentTemplate
+
+    # Меры поддержки с обязательными документами
+    measures = get_support_measures(include_documents=True)
+
+    # Все шаблоны документов
+    session = get_db_session()
+    try:
+        templates = session.query(DocumentTemplate).all()
+        template_list = [{
+            "id": str(t.id),
+            "support_measure_id": t.support_measure_id,
+            "document_type": t.document_type,
+            "template_name": t.template_name,
+            "template_content": t.template_content,
+            "required_fields": _json.loads(t.required_fields) if t.required_fields else []
+        } for t in templates]
+    finally:
+        session.close()
+
+    # Добавляем название меры поддержки к каждому шаблону
+    measure_map = {m["id"]: m["name"] for m in measures}
+    for t in template_list:
+        t["support_measure_name"] = measure_map.get(t["support_measure_id"], "")
+
+    return {
+        "templates": template_list,
+        "measures": measures
+    }
+
+
 @app.get("/api/search")
 async def search(query: str):
     """Поиск по базе знаний"""
@@ -476,6 +512,7 @@ if __name__ == "__main__":
     print("     GET  /api/projects        — список проектов")
     print("     GET  /api/territories     — территории")
     print("     GET  /api/support-measures — меры поддержки")
+    print("     GET  /api/documents       — документы и шаблоны")
     print("     GET  /api/search?q=...    — поиск")
     print("     POST /api/chat            — чат с агентом")
     print("\n" + "=" * 60 + "\n")

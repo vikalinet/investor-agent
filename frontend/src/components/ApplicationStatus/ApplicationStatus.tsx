@@ -15,14 +15,14 @@ const defaultSteps: ApplicationStep[] = [
     title: 'Подготовка документов',
     status: 'completed',
     description: 'Сбор и проверка пакета документов',
-    date: '15.06.2024',
+    date: '15.06.2026',
   },
   {
     id: '2',
     title: 'Подача заявки',
     status: 'completed',
     description: 'Отправка в министерство',
-    date: '18.06.2024',
+    date: '18.06.2026',
   },
   {
     id: '3',
